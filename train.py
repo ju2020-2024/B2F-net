@@ -5,11 +5,6 @@ def train(train_loader, model, optimizer, criterion,args):
     model.train()
 
     total_loss =[]
-
-    total_loss_2 = []
-    main_losses = []
-    aux_losses = []
-
     for i, (inputs, labels) in tqdm(enumerate(train_loader)):
         seq_len = torch.sum(torch.max(torch.abs(inputs), dim=2)[0] > 0, 1)
         inputs = inputs[:, :torch.max(seq_len), :]

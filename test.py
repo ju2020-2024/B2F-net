@@ -10,7 +10,7 @@ def test(test_loader, model, gt,args):
 
             inputs = inputs.to(args.device)
 
-            out = model(inputs,None) # 只要片段分数
+            out = model(inputs,None)
             s1, s2, s3 = out["frame_scores"]
             segment_scores = (s1 + s2 + s3) / 3
             segment_scores = torch.sigmoid(segment_scores)

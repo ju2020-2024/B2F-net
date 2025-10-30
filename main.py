@@ -57,7 +57,7 @@ if __name__ == '__main__':
     model = model.TemporalSpatialModel(args)
     if torch.cuda.is_available():
         model = model.to(args.device)
-    test_tensor = (torch.rand(128, 200, 1152),)
+    test_tensor = (torch.rand(128, 200, 1024),)
     flops = FlopCountAnalysis(model, test_tensor)
     print(">>> training params: {:.3f}M".format(
         sum(p.numel() for p in model.parameters() if p.requires_grad) / 1000000.0))
@@ -90,16 +90,13 @@ if __name__ == '__main__':
             criterion=criterion,
             args=args,
         )
-
+        scheduler.step()
         AUC, AP = test(
             test_loader=test_loader,
             model=model,
             gt=gt,
             args=args
         )
-
-        scheduler.step()
-
         if AUC > best_auc or AP > best_ap:
             best_auc = max(best_auc, AUC)
             best_ap = max(best_ap, AP)

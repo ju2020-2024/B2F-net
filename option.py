@@ -25,5 +25,5 @@ parser.add_argument('--relu_rate', type=float, default=0.014,help='leaky relu')
 parser.add_argument('--dropout', type=float, default=0.2,help='dropout rate')
 parser.add_argument('--weight_decay', type=float, default=0.0005)
 parser.add_argument('--gamma', type=float, default=0.01)
-parser.add_argument('--lambda_center', type=float, default=0.1)
+
 
